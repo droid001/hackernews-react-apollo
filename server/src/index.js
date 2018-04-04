@@ -1,30 +1,30 @@
-const { GraphQLServer } = require("graphql-yoga");
-const { Prisma } = require("prisma-binding");
-const Query = require("./resolvers/Query");
-const Mutation = require("./resolvers/Mutation");
-const Subscription = require("./resolvers/Subscription");
-const Feed = require("./resolvers/Feed");
+const { GraphQLServer } = require('graphql-yoga')
+const { Prisma } = require('prisma-binding')
+const Query = require('./resolvers/Query')
+const Mutation = require('./resolvers/Mutation')
+const Subscription = require('./resolvers/Subscription')
+const Feed = require('./resolvers/Feed')
 
 const resolvers = {
   Query,
   Mutation,
   Subscription,
-  Feed
-};
-
+  Feed,
+}
+// Note: If you ever lose the endpoint, you can get access to it again by running
+// yarn prisma info.
 const server = new GraphQLServer({
-  typeDefs: "./src/schema.graphql",
+  typeDefs: './src/schema.graphql',
   resolvers,
   context: req => ({
     ...req,
     db: new Prisma({
-      typeDefs: "src/generated/prisma.graphql",
-      endpoint:
-        "https://eu1.prisma.sh/public-lightmare-973/hackernews-graphql-js/dev",
-      secret: "mysecret123",
+      typeDefs: 'src/generated/prisma.graphql',
+      endpoint: 'https://eu1.prisma.sh/public-lightmare-973/hackernews-graphql-js/dev',
+      secret: 'mysecret123',
       debug: true
-    })
-  })
-});
+    }),
+  }),
+})
 
-server.start(() => console.log("Server is running on http://localhost:4000"));
+server.start(() => console.log('Server is running on http://localhost:4000'))
